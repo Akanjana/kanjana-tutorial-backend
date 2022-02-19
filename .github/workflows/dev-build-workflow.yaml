@@ -50,7 +50,7 @@ jobs:
         name: Unit Test Results
         path: '${{ github.workspace }}/report.html'
 
-analyze:
+  analyze:
     name: SAST CodeQL
     runs-on: ubuntu-latest
     permissions:
