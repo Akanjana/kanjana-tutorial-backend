@@ -102,14 +102,14 @@ jobs:
       uses: github/codeql-action/analyze@v1
 
 
-build:
+  build:
   name: Build
   runs-on: ubuntu-latest
   environment: 
     name: dev
     url: https://github.com/Akanjana/kanjana-tutorial-pipeline/actions/workflows/dev-tutorial-backend-deploy.yml
   needs: [unitest,analyze] # if on env sit don't use
-  
+
   steps:
   - name: Checkout code
     uses: actions/checkout@v2
