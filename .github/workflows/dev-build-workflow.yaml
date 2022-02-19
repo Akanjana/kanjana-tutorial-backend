@@ -38,5 +38,5 @@ jobs:
     - name: Upload Reports
       uses: actions/upload-artifact@v2
       with:
-      - name: Unit Test Results
+        name: Unit Test Results
         path: '${{ github.tutorial }}/coverage/lcov-report/*'  
