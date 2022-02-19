@@ -139,3 +139,6 @@ jobs:
         repository: Akanjana/kanjana-tutorial-pipeline
         event-type: kanjana-tutorial-backend-cd-dev
         client-payload: '{"ref": "${{ github.ref }}", "sha": "${{ github.sha }}"}'
+
+
+        
