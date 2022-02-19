@@ -20,23 +20,32 @@ jobs:
     name: UnitTest
     runs-on: ubuntu-latest
     environment: dev
+    
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
   
-    - name: Setup node
-      uses: actions/setup-node@v2
+    - name: Setup go
+      uses: actions/setup-go@v2
       with:
-        node-version: '14'
-      
-    - name: Install dependencies
-      run: npm install
-    
-    - name: Unit test
-      run: npm run test:unit
+        go-version: '^1.17.6' # The Go version to download (if necessary) and use.
 
+
+    - name: Install dependencies
+      run: |
+        go env -w GO111MODULE=on
+        go get -u github.com/gin-gonic/gin
+        go get -u go.mongodb.org/mongo-driver/mongo
+        go get -u github.com/stretchr/testify
+        go mod vendor
+
+    - name: Unit test
+      run: |
+        go test -coverprofile coverage.out ./...
+        go tool cover -html coverage.out -o report.html
+        
     - name: Upload Reports
       uses: actions/upload-artifact@v2
       with:
         name: Unit Test Results
-        path: '${{ github.worksp }}/coverage/lcov-report/*'  
+        path: '${{ github.workspace }}/report.html'
